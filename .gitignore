@@ -187,7 +187,3 @@ $RECYCLE.BIN/
 Cargo.lock
 
 *.node
-
-# Ignore autogenrated files
-index.js
-index.d.ts
