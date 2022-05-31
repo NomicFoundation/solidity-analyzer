@@ -9,3 +9,4 @@ rustfmt.toml
 yarn.lock
 *.node
 __test__
+test-with-sanctuary
