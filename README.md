@@ -43,3 +43,9 @@ Both are achieved by not parsing the Solidity source but just tokenizing it inst
 ## Browser support
 
 This library doesn't work in a browser.
+
+## Testing
+
+This project has some JavaScript unit tests in `__test__`, and it's also tested using the entire [`smart-contract-sanctuary`](https://github.com/tintinweb/smart-contract-sanctuary).
+
+You can find the scripts to test with the sanctuary in `test-with-sanctuary/`.
