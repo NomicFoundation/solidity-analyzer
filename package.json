@@ -4,6 +4,13 @@
   "repository": "github:NomicFoundation/solidity-analyzer",
   "main": "index.js",
   "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "Cargo.toml",
+    "build.rs",
+    "src/**/*.rs"
+  ],
   "napi": {
     "name": "solidity-analyzer",
     "triples": {
