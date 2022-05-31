@@ -23,7 +23,7 @@
     "ava": "^4.2.0"
   },
   "engines": {
-    "node": ">= 10"
+    "node": ">= 12"
   },
   "scripts": {
     "artifacts": "napi artifacts",
@@ -31,6 +31,7 @@
     "build:debug": "napi build --platform",
     "prepublishOnly": "napi prepublish -t npm",
     "test": "ava",
-    "version": "napi version"
+    "version": "napi version",
+    "clean": "rm index.js index.d.ts *.node"
   }
 }
