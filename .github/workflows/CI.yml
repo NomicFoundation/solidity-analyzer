@@ -2,23 +2,23 @@ name: CI
 env:
   DEBUG: napi:*
   APP_NAME: solidity-analyzer
-  MACOSX_DEPLOYMENT_TARGET: "10.13"
-"on":
+  MACOSX_DEPLOYMENT_TARGET: '10.13'
+'on':
   push:
     branches:
       - main
     tags-ignore:
-      - "**"
+      - '**'
     paths-ignore:
-      - "**/*.md"
+      - '**/*.md'
       - LICENSE
-      - "**/*.gitignore"
+      - '**/*.gitignore'
       - .editorconfig
       - docs/**
   pull_request: null
 jobs:
   build:
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    if: '!contains(github.event.head_commit.message, ''skip ci'')'
     strategy:
       fail-fast: false
       matrix:
@@ -111,12 +111,12 @@ jobs:
             .cargo-cache/registry/cache/
             .cargo-cache/git/db/
             target/
-          key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
       - name: Cache NPM dependencies
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: npm-cache-build-${{ matrix.settings.target }}-node@16-${{ hashFiles('package-lock.json') }}
+          key: npm-cache-build-${{ matrix.settings.target }}-node@16
       - name: Setup toolchain
         run: ${{ matrix.settings.setup }}
         if: ${{ matrix.settings.setup }}
@@ -128,7 +128,7 @@ jobs:
         if: ${{ matrix.settings.docker }}
         with:
           image: ${{ matrix.settings.docker }}
-          options: "--user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/root/.cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/root/.cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/root/.cargo/registry/index -v ${{ github.workspace }}:/build -w /build"
+          options: '--user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/root/.cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/root/.cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/root/.cargo/registry/index -v ${{ github.workspace }}:/build -w /build'
           run: ${{ matrix.settings.build }}
       - name: Build
         run: ${{ matrix.settings.build }}
@@ -200,9 +200,9 @@ jobs:
           - host: windows-latest
             target: x86_64-pc-windows-msvc
         node:
-          - "14"
-          - "16"
-          - "18"
+          - '14'
+          - '16'
+          - '18'
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v3
@@ -216,7 +216,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: npm-cache-test-${{ matrix.settings.target }}-${{ matrix.node }}-${{ hashFiles('package-lock.json') }}
+          key: npm-cache-test-${{ matrix.settings.target }}-${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
       - name: Install dependencies
         run: yarn install --ignore-scripts --frozen-lockfile --registry https://registry.npmjs.org --network-timeout 300000
       - name: Download artifacts
@@ -237,9 +237,9 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - "14"
-          - "16"
-          - "18"
+          - '14'
+          - '16'
+          - '18'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -253,7 +253,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: npm-cache-test-linux-x64-gnu-${{ matrix.node }}-${{ hashFiles('package-lock.json') }}
+          key: npm-cache-test-linux-x64-gnu-${{ matrix.node }}
       - name: Install dependencies
         run: yarn install --ignore-scripts --frozen-lockfile --registry https://registry.npmjs.org --network-timeout 300000
       - name: Download artifacts
@@ -274,9 +274,9 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - "14"
-          - "16"
-          - "18"
+          - '14'
+          - '16'
+          - '18'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -290,7 +290,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: npm-cache-test-x86_64-unknown-linux-musl-${{ matrix.node }}-${{ hashFiles('package-lock.json') }}
+          key: npm-cache-test-x86_64-unknown-linux-musl-${{ matrix.node }}
       - name: Install dependencies
         run: yarn install --ignore-scripts --frozen-lockfile --registry https://registry.npmjs.org --network-timeout 300000
       - name: Download artifacts
@@ -311,9 +311,9 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - "14"
-          - "16"
-          - "18"
+          - '14'
+          - '16'
+          - '18'
     runs-on: ubuntu-latest
     steps:
       - run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -330,14 +330,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: npm-cache-test-linux-aarch64-gnu-${{ matrix.node }}-${{ hashFiles('package-lock.json') }}
+          key: npm-cache-test-linux-aarch64-gnu-${{ matrix.node }}
       - name: Install dependencies
         run: yarn install --ignore-scripts --ignore-platform --frozen-lockfile --registry https://registry.npmjs.org --network-timeout 300000
       - name: Setup and run tests
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/napi-rs/napi-rs/nodejs:aarch64-${{ matrix.node }}
-          options: "-v ${{ github.workspace }}:/build -w /build"
+          options: '-v ${{ github.workspace }}:/build -w /build'
           run: |
             set -e
             yarn test
@@ -362,14 +362,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: npm-cache-test-linux-aarch64-musl-${{ matrix.node }}-${{ hashFiles('package-lock.json') }}
+          key: npm-cache-test-linux-aarch64-musl-${{ matrix.node }}
       - name: Install dependencies
         run: yarn install --ignore-scripts --ignore-platform --frozen-lockfile --registry https://registry.npmjs.org --network-timeout 300000
       - name: Setup and run tests
         uses: addnab/docker-run-action@v3
         with:
           image: multiarch/alpine:aarch64-latest-stable
-          options: "-v ${{ github.workspace }}:/build -w /build"
+          options: '-v ${{ github.workspace }}:/build -w /build'
           run: |
             set -e
             apk add nodejs npm yarn
@@ -396,7 +396,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: npm-cache-ubuntu-latest-publish-${{ hashFiles('package-lock.json') }}
+          key: npm-cache-ubuntu-latest-publish
       - name: Install dependencies
         run: yarn install --ignore-scripts --frozen-lockfile --registry https://registry.npmjs.org --network-timeout 300000
       - name: Download all artifacts
