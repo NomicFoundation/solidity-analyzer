@@ -47,5 +47,8 @@
     "version": "napi version",
     "clean": "rm index.js index.d.ts *.node",
     "prettier": "prettier --write *.md *.json *.js *.d.ts __test__/*.mjs"
+  },
+  "ava": {
+    "timeout": "2m"
   }
 }
