@@ -8,6 +8,7 @@
     "index.js",
     "index.d.ts",
     "Cargo.toml",
+    "Cargo.lock",
     "build.rs",
     "src/**/*.rs"
   ],
