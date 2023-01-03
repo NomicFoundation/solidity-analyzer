@@ -7,7 +7,7 @@ version = "0.0.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-solang-parser = "0.1.13"
+solang-parser = "0.2.1"
 # Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
 napi = { version = "2.4.3", default-features = false, features = ["napi4"] }
 napi-derive = "2.4.1"
