@@ -32,24 +32,26 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@napi-rs/cli": "2.9.0",
-    "ava": "4.3.3",
+    "@napi-rs/cli": "2.14.8",
+    "ava": "5.1.1",
     "prettier": "2.6.2"
+  },
+  "ava": {
+    "timeout": "3m"
   },
   "engines": {
     "node": ">= 12"
   },
   "scripts": {
     "artifacts": "napi artifacts",
-    "build": "napi build --platform --release",
+    "build": "napi build --platform --release && yarn prettier",
     "build:debug": "napi build --platform",
     "prepublishOnly": "napi prepublish -t npm",
     "test": "ava",
+    "universal": "napi universal",
     "version": "napi version",
-    "clean": "rm index.js index.d.ts *.node",
+    "clean": "rm -rf index.js index.d.ts *.node target",
     "prettier": "prettier --write *.md *.json *.js *.d.ts __test__/*.mjs"
   },
-  "ava": {
-    "timeout": "2m"
-  }
+  "packageManager": "yarn@3.4.1"
 }
