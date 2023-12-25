@@ -170,6 +170,24 @@ switch (platform) {
       loadError = e;
     }
     break;
+  case "openbsd":
+    if (arch !== "x64") {
+      throw new Error(`Unsupported architecture on OpenBSD: ${arch}`);
+    }
+    localFileExisted = existsSync(
+      join(__dirname, "solidity-analyzer.openbsd-x64.node")
+    );
+    try {
+      if (localFileExisted) {
+        nativeBinding = require("./solidity-analyzer.openbsd-x64.node");
+      } else {
+        nativeBinding = require("@nomicfoundation/solidity-analyzer-openbsd-x64");
+      }
+    } catch (e) {
+      loadError = e;
+    }
+    break;
+
   case "linux":
     switch (arch) {
       case "x64":
